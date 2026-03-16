@@ -1,4 +1,14 @@
 package br.unipar.frameworks.commands;
 
-public class HelloCommand {
+import br.unipar.framework.miniframework.CommandHandler;
+import br.unipar.framework.miniframework.Request;
+import br.unipar.framework.miniframework.Response;
+
+public class HelloCommand implements CommandHandler {
+
+    @Override
+    public Response handle(Request request) {
+        String nome =  request.getArgs().isEmpty() ? "Emerson" : request.getArgs().get(0);
+        return Response.ok("Hello " + nome + "!");
+    }
 }

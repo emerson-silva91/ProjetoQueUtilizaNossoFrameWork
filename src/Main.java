@@ -1,15 +1,38 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import br.unipar.framework.miniframework.Dispatcher;
+import br.unipar.framework.miniframework.Request;
+import br.unipar.framework.miniframework.Response;
+import br.unipar.frameworks.commands.ConvertCommand;
+import br.unipar.frameworks.commands.HelloCommand;
+import br.unipar.frameworks.commands.PercentCommand;
+import br.unipar.frameworks.commands.SommaCommand;
+
+import java.util.Scanner;
+
+
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
+        Dispatcher dispatcher = new Dispatcher();
+
+        dispatcher.register("hello", new HelloCommand());
+        dispatcher.register("soma", new SommaCommand());
+        dispatcher.register("porcentagem", new PercentCommand());
+        dispatcher.register("quantidade_de_horas", new ConvertCommand());
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("App iniciado! Digite um comando: " + "(ex: 'hello' ou 'hello Alice' ou 'sair' para sair");
+
+        while (true) {
+            System.out.println("> ");
+            String input = scanner.nextLine();
+            if ("sair".equalsIgnoreCase(input) ) {
+                System.out.println("Encerrando a aplicação. Até logo!");
+                break;
+            }
+            Request request = Request.fromInput(input);
+            Response  response = dispatcher.dispatch(request);
+
+            System.out.println(response);
         }
     }
 }
