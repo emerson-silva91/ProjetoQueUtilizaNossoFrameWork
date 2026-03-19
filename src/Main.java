@@ -17,7 +17,7 @@ public class Main {
         dispatcher.register("hello", new HelloCommand());
         dispatcher.register("soma", new SommaCommand());
         dispatcher.register("porcentagem", new PercentCommand());
-        dispatcher.register("quantidade_de_horas", new ConvertCommand());
+        dispatcher.register("horas", new ConvertCommand());
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("App iniciado! Digite um comando: " + "(ex: 'hello' ou 'hello Alice' ou 'sair' para sair");

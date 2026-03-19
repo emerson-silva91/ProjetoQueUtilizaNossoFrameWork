@@ -8,7 +8,7 @@ public class ConvertCommand implements CommandHandler {
     @Override
     public Response handle(Request request) {
         if (request.getArgs().isEmpty()) {
-            return  Response.badRequest("Uso: horas <quantidade_de_horas>");
+            return  Response.badRequest("Uso: horas <horas>");
         }
 
         try {
